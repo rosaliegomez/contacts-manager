@@ -1,13 +1,33 @@
-import javax.imageio.IIOException;
-import java.io.IOException;
+package util;
+
+import app.ContactsApp;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.*;
+import java.io.IOException;
+import java.util.List;
+import util.Input;
+import util.FileHandler;
+
+
+
+
 
 public class FileHandler {
+  Path contactPath = Paths.get("contacts","contacts.txt");
+  Input input = new Input();
+  ContactsApp contactsApp = new ContactsApp();
+
+
+
   private String directory;
   private String filename;
   private Path filePath;
+
+
 
   public FileHandler(String directory, String filename) {
     this.directory = directory;
@@ -31,6 +51,26 @@ public class FileHandler {
     }
     return true;
   }
+
+
+  public List<String> viewContacts () throws IOException {
+    List<String> contactsListView = Files.readAllLines(contactPath);
+    return contactsListView;
+  }
+
+  public List<String> addContact(List contacts) throws IOException {
+    Files.write(contactPath, contacts, StandardOpenOption.APPEND);
+    return contacts;
+  }
+
+  private String searchContact(){
+    return "";
+  }
+
+  private String deleteContact(){
+    return "";
+  }
+
   public boolean writeToFile(){
     return false;
   }
