@@ -1,7 +1,5 @@
 package app;
 
-import com.sun.tools.doclets.internal.toolkit.util.DocFinder;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,16 +17,6 @@ public class ContactsApp {
         Input input = new Input();
         FileHandler fileHandler = new FileHandler("util","FileHandler.java");
 
-        List<String> contactsList = Arrays.asList("Jane Doe, 090909090");
-        Files.write(Paths.get("contacts", "contacts.txt"), contactsList);
-
-
-        //Path contactPath = Paths.get("contacts","contacts.txt");
-
-
-
-
-
         do {
 
             System.out.println("1. View Contacts. \n" +
@@ -39,15 +27,11 @@ public class ContactsApp {
 
             int selections = input.getInt("Enter an option (1, 2, 3, 4 or 5):");
 
-
-
-
             switch(selections) {
                 case 1:
-                    System.out.println(fileHandler.viewContacts());
+                    viewContacts(fileHandler);
                     break;
                 case 2:
-
                     break;
 //                case 3:
 //                    searchContact();
@@ -62,27 +46,24 @@ public class ContactsApp {
 
         }while (input.yesNo("Would you like to continue? "));
 
-        String directory = "contacts";
-        String filename = "contacts.txt";
-
-        FileHandler contactsFile = new FileHandler(directory, filename);
-        contactsFile.createFile();
-
-
-
-
 
 
     }
 
 
 
+        public static void viewContacts(FileHandler fileHandler) throws IOException {
+            fileHandler.readFile();
+        }
+
+       /* public addContact() {
+
+        }
+        public searchContact() {
+
+        }
+        public deleteContact() {
+
+        }*/
 }
 
-/*
-1. View contacts.
-        2. Add a new contact.
-        3. Search a contact by name.
-        4. Delete an existing contact.
-        5. Exit.
-        Enter an option (1, 2, 3, 4 or 5):*/

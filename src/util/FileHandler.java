@@ -13,9 +13,6 @@ import util.Input;
 import util.FileHandler;
 
 
-
-
-
 public class FileHandler {
   Path contactPath = Paths.get("contacts","contacts.txt");
   Input input = new Input();
@@ -53,29 +50,19 @@ public class FileHandler {
   }
 
 
-  public List<String> viewContacts () throws IOException {
-    List<String> contactsListView = Files.readAllLines(contactPath);
-    return contactsListView;
+  public List readFile () throws IOException {
+    return Files.readAllLines(contactPath);
+
+
   }
 
-  public List<String> addContact(List contacts) throws IOException {
+  public List<String> writeFile (List contacts) throws IOException {
     Files.write(contactPath, contacts, StandardOpenOption.APPEND);
     return contacts;
   }
 
-  private String searchContact(){
-    return "";
+
+
   }
 
-  private String deleteContact(){
-    return "";
-  }
 
-  public boolean writeToFile(){
-    return false;
-  }
-  public boolean readFromFile(){
-    return false;
-  }
-
-}
