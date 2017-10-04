@@ -56,7 +56,7 @@ public class FileHandler {
 
   }
 
-  public List<String> writeFile (List contacts) throws IOException {
+  public List append (List contacts) throws IOException {
     Files.write(contactPath, contacts, StandardOpenOption.APPEND);
     return contacts;
   }

@@ -32,6 +32,7 @@ public class ContactsApp {
                     viewContacts(fileHandler);
                     break;
                 case 2:
+                    fileHandler.append(fileHandler);
                     break;
 //                case 3:
 //                    searchContact();
@@ -49,16 +50,16 @@ public class ContactsApp {
 
 
     }
-
-
-
         public static void viewContacts(FileHandler fileHandler) throws IOException {
-            fileHandler.readFile();
+            System.out.println(fileHandler.readFile());
         }
 
-       /* public addContact() {
-
+        public static void addContact(FileHandler fileHandler) {
+        Input input = new Input();
+            String newContact = input.getString("Enter a new contact");
+            System.out.println(fileHandler.append(newContact));
         }
+        /*
         public searchContact() {
 
         }
