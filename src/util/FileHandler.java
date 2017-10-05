@@ -6,11 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.*;
 import java.io.IOException;
 import java.util.List;
-import util.Input;
-import util.FileHandler;
 
 
 public class FileHandler {
@@ -50,15 +47,16 @@ public class FileHandler {
   }
 
 
-  public List readFile () throws IOException {
-    return Files.readAllLines(contactPath);
+  public List<String> readFile (Path path) throws IOException {
+    return Files.readAllLines(path);
 
 
   }
 
-  public List<String> writeFile (List contacts) throws IOException {
-    Files.write(contactPath, contacts, StandardOpenOption.APPEND);
-    return contacts;
+  public List append (Path path, List list) throws IOException {
+    Files.write(path, list, StandardOpenOption.APPEND);
+
+    return list;
   }
 
 
