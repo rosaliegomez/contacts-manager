@@ -47,7 +47,7 @@ public class FileHandler {
   }
 
 
-  public List<String> readFile (Path path) throws IOException {
+  public <String> readFile (Path path) throws IOException {
     return Files.readAllLines(path);
 
 
