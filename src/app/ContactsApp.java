@@ -7,33 +7,31 @@ import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.io.IOException;
 import java.util.List;
+
 import util.Input;
 import util.FileHandler;
 
 
 public class ContactsApp {
 
+    public static Input input = new Input();
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException, ConcurrentModificationException {
 
-        Input input = new Input();
-        FileHandler fileHandler = new FileHandler("util","FileHandler.java");
-
-        Contact contact = new Contact();
+        FileHandler fileHandler = new FileHandler("contacts", "contacts.txt");
 
         do {
 
             System.out.println("1. View Contacts. \n" +
                     "2. Add a new contact. \n" +
-                    "3. Search a contact by name." +
+                    "3. Search a contact by name. \n" +
                     "4. Delete and existing contact \n" +
                     "5. Exit \n");
 
             int selections = input.getInt("Enter an option (1, 2, 3, 4 or 5):");
 
 
-
-            switch(selections) {
+            switch (selections) {
                 case 1:
                     viewContacts(fileHandler);
                     break;
@@ -43,60 +41,64 @@ public class ContactsApp {
                 case 3:
                     searchContact(fileHandler);
                     break;
-//                case 4:
-//                    deleteContact();
-//                    break;
+                case 4:
+                    deleteContact(fileHandler);
+                    break;
 //                case 5:
 //                    break;
 //                    default:
             }
 
-        }while (input.yesNo("Would you like to continue? "));
-
-
-
+        } while (input.yesNo("Would you like to continue? "));
     }
-        public static void viewContacts(FileHandler fileHandler) throws IOException {
-            Path contactPath = Paths.get("contacts", "contacts.txt");
-            Contact contact = new Contact();
-            System.out.println(fileHandler.readFile(contactPath));
-            //for (String contact: fileHandler.readFile(contactPath)) {
-               // String[] parts = contact.split(" ");
-                //System.out.println("Name: " + parts[0] + " Phone number: " + parts[1]);
-               // System.out.println(fileHandler.readFile(contactPath));
-            //}
+
+    public static void viewContacts(FileHandler fileHandler) throws IOException {
+        for (String contact : fileHandler.readFile()) {
+//            String[] parts = contact.split(" | ");
+            System.out.println(contact);
         }
+    }
 
+    public static void appendContact(FileHandler fileHandler) throws IOException {
+        String contact = input.getString("Enter a contact name")
+                + " | " + input.getString("Enter a phone #: ");
 
+        List<String> contactList = new ArrayList<String>();
+        contactList.add(contact);
 
-        public static void appendContact (FileHandler fileHandler) throws IOException {
-            Input input = new Input();
-            Contact contact = new Contact();
-            Path contactPath = Paths.get("contacts", "contacts.txt");
-            /*String newContact = input.getString("Enter a new contact");*/
-            List<Contact> contactList = new ArrayList<>();
+        fileHandler.writeToFile(contactList, true);
 
-            Files.write(contactPath, contactList, StandardOpenOption.APPEND);
-
-            System.out.println(contactList);
+        System.out.println(contactList);
     }
 
 
-        public static void searchContact(FileHandler fileHandler) {
-            Input input = new Input();
-            Path contactPath = Paths.get("contacts", "contacts.txt");
-            String searchedName = input.getString("Enter a name to search");
-            List<String> contactList = Arrays.asList();
+    public static void searchContact(FileHandler fileHandler) throws IOException {
+        String searchedName = input.getString("Enter a name to search");
+        List<String> contactList = fileHandler.readFile();
 
-            if (contactList.contains(searchedName)){
-                System.out.println(searchedName);
+        for (String contact : contactList) {
+            if (contact.contains(searchedName)) {
+                System.out.println(contact);
             }
-
-
         }
-        /*
-        public deleteContact() {
+    }
 
-        }*/
+    public static void deleteContact(FileHandler fileHandler) throws IOException, ConcurrentModificationException {
+
+        String contactToBeDeleted = input.getString("Which name would you like to delete??");
+        List<String> contactList = fileHandler.readFile();
+        List<String> newList = new ArrayList<>();
+
+        for (String contact : contactList) {
+            if (contact.contains(contactToBeDeleted) &&
+                    input.yesNo("Delete " + contact + " ? (y/n)")) {
+                continue;
+            }
+            newList.add(contact);
+        }
+
+        fileHandler.writeToFile(newList, false);
+
+    }
 }
 

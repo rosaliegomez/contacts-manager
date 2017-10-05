@@ -1,7 +1,2 @@
-Jane Doe, 090909090
-Jane Doe 9999999999
-Rosalie Gomez 5555555555
-Joe Black 44444444
-Brad Pitt 8888888888
-Josh Clark 9999999999
-Chase Hammock 0000000000
+Jane Doe | 9999999999
+Joe Black | 44444444
