@@ -97,6 +97,7 @@ public class ContactsApp {
             newList.add(contact);
         }
 
+        //test
         fileHandler.writeToFile(newList, false);
 
     }
