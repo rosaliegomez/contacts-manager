@@ -11,21 +11,15 @@ import java.util.List;
 
 
 public class FileHandler {
-  Path contactPath = Paths.get("contacts","contacts.txt");
-  Input input = new Input();
-  ContactsApp contactsApp = new ContactsApp();
-
-
 
   private String directory;
   private String filename;
   private Path filePath;
 
-
-
   public FileHandler(String directory, String filename) {
     this.directory = directory;
     this.filename = filename;
+    this.createFile();
   }
 
   public boolean createFile(){
@@ -47,18 +41,21 @@ public class FileHandler {
   }
 
 
-  public <String> readFile (Path path) throws IOException {
-    return Files.readAllLines(path);
-
-
+  public List<String> readFile () throws IOException {
+    return Files.readAllLines(this.filePath);
   }
 
-  public List append (Path path, List list) throws IOException {
-    Files.write(path, list, StandardOpenOption.APPEND);
-
-    return list;
+  public void writeToFile (List list, boolean append) throws IOException {
+    if(append){
+      Files.write(this.filePath, list, StandardOpenOption.APPEND);
+    } else{
+      Files.write(this.filePath,list);
+    }
   }
 
+//  public void delete (List list) throws IOException {
+//    Files.delete(this.filePath);
+//  }
 
 
   }
