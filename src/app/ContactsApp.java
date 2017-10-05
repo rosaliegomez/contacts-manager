@@ -19,6 +19,7 @@ public class ContactsApp {
         Input input = new Input();
         FileHandler fileHandler = new FileHandler("util","FileHandler.java");
 
+        Contact contact = new Contact();
 
         do {
 
@@ -57,6 +58,7 @@ public class ContactsApp {
     }
         public static void viewContacts(FileHandler fileHandler) throws IOException {
             Path contactPath = Paths.get("contacts", "contacts.txt");
+            Contact contact = new Contact();
             System.out.println(fileHandler.readFile(contactPath));
             //for (String contact: fileHandler.readFile(contactPath)) {
                // String[] parts = contact.split(" ");
@@ -69,9 +71,10 @@ public class ContactsApp {
 
         public static void appendContact (FileHandler fileHandler) throws IOException {
             Input input = new Input();
+            Contact contact = new Contact();
             Path contactPath = Paths.get("contacts", "contacts.txt");
-            String newContact = input.getString("Enter a new contact");
-            List<String> contactList = Arrays.asList(newContact);
+            /*String newContact = input.getString("Enter a new contact");*/
+            List<Contact> contactList = new ArrayList<>();
 
             Files.write(contactPath, contactList, StandardOpenOption.APPEND);
 
