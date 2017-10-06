@@ -8,6 +8,7 @@ import java.util.*;
 import java.io.IOException;
 import java.util.List;
 
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import util.Input;
 import util.FileHandler;
 
@@ -54,21 +55,28 @@ public class ContactsApp {
 
     public static void viewContacts(FileHandler fileHandler) throws IOException {
         for (String contact : fileHandler.readFile()) {
-//            String[] parts = contact.split(" | ");
+//            String[] parts = contact.split(" ");
+
             System.out.println(contact);
         }
     }
 
     public static void appendContact(FileHandler fileHandler) throws IOException {
-        String contact = input.getString("Enter a contact name")
-                + " | " + input.getString("Enter a phone #: ");
+        String contactName = input.getString("Enter a contact name");
+        String contactPhone = formatPhoneNumber(input.getPhoneNumber("Enter a phone #: "));
 
         List<String> contactList = new ArrayList<String>();
-        contactList.add(contact);
+        contactList.add(contactName +  " | " + contactPhone);
+//        for(String number: contactList){
+//            String[] parts = number.split(" | ");
+//            if(parts[3].) {
+//                System.out.println("Add a valid number");
+//            }
+//
+//        }
 
         fileHandler.writeToFile(contactList, true);
 
-        System.out.println(contactList);
     }
 
 
@@ -100,6 +108,13 @@ public class ContactsApp {
         //test
         fileHandler.writeToFile(newList, false);
 
+    }
+    public static String formatPhoneNumber(String phoneNumber){
+        String areaCode = phoneNumber.substring(0,3);
+        String whateverYouCallTheFirstThreeNumbersInAPhoneNumber = phoneNumber.substring(3,6);
+        String lastFour = phoneNumber.substring(6,10);
+        String formattedNumber = "(" + areaCode + ")" + whateverYouCallTheFirstThreeNumbersInAPhoneNumber + "-" + lastFour;
+        return formattedNumber;
     }
 }
 

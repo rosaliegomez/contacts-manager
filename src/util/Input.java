@@ -83,6 +83,17 @@ public class Input {
         return newDouble;
     }
 
+    public String getPhoneNumber(String prompt){
+        System.out.println(prompt);
+        String stringInput = scan.nextLine();
+        if(stringInput.trim().length() != 10){
+            System.out.println("Enter a valid number.");
+            return getPhoneNumber(prompt);
+        }
+        System.out.println(stringInput);
+        return stringInput;
+    }
+
 
 
 
