@@ -14,14 +14,12 @@ public class Input {
     public int getBinary(String binary){
         System.out.println(binary);
         String toBinary = scan.nextLine();
-        System.out.println(Integer.parseInt(toBinary,2));
-        return Integer.parseInt(toBinary);
+        return Integer.parseInt(toBinary, 2);
     }
 
     public String getString(String prompt){
         System.out.println(prompt);
         String stringInput = scan.nextLine();
-        System.out.println(stringInput);
         return stringInput;
     }
 
@@ -53,7 +51,7 @@ public class Input {
             System.out.println("Error - Number must be within range");
             return getIntWithinRange(prompt, min, max);
         }
-//        scan.nextLine();
+
         return newNumber;
     }
 
@@ -90,7 +88,6 @@ public class Input {
             System.out.println("Enter a valid number.");
             return getPhoneNumber(prompt);
         }
-        System.out.println(stringInput);
         return stringInput;
     }
 
